@@ -7,7 +7,7 @@ use Auth0\SDK\Auth0;
 $auth0 = new Auth0([
   'domain' => 'eas-test.auth0.com',
   'client_id' => 'MpCoImj9azpIKU2259fFXAXXcY1xJRYp',
-  'client_secret' => 'CtSyWxuT8P6KOj2RTQu1ZLNvN1HmiZKrDfE4bboLKBSfgZQbT6B41aEu3Qxt',
+  'client_secret' => 'CtSyWxuT8P6KOj2RTQu1ZLNvN1HmiZKrDfE4bboLKBSfgZQbT6B41aEu3Qxt-G33',
   'redirect_uri' => 'http://sso-app1/callback',
   'audience' => 'https://eas-test.auth0.com/userinfo',
   'scope' => 'openid profile',

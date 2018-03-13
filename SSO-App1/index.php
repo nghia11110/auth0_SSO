@@ -1,48 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>EAS SSO App 1</title>
-    <!-- jQUERY   -->
-    <script
-      src="http://code.jquery.com/jquery-3.2.1.min.js"
-      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"></script>
-    <!-- Auth0 -->
-    <script src="https://cdn.auth0.com/js/auth0/8.8/auth0.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    
+<?php
 
-    <!-- Initializing Script -->
-    <script>
-        $(document).ready(function() {
-          var webAuth = new auth0.WebAuth({
-            domain: 'eas-test.auth0.com',
-            clientID: 'MpCoImj9azpIKU2259fFXAXXcY1xJRYp',
-            redirectUri: 'http://localhost/sso-app1/callback',
-            audience: `https://eas-test.auth0.com/userinfo`,
-            responseType: 'code',
-            scope: 'openid profile'
-          });
+require "init.php";
 
-          $('#login').click(function(e) {
-            e.preventDefault();
-            webAuth.authorize();
-          });
-        });
-    </script>
-</head>
-<body>
-    <div class="container" style="margin-top: 200px;">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <button id="login" class="btn btn-lg btn-danger btn-block">Sign in to App1 with Auth0</button>
+$userInfo = $auth0->getUser();
+?>
+
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- font awesome from BootstrapCDN -->
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <link href="public/app.css" rel="stylesheet">
+
+
+
+    </head>
+    <body class="home">
+        <div class="container">
+            <div class="login-page clearfix">
+              <?php if(!$userInfo): ?>
+              <div class="login-box auth0-box before">
+                <img src="https://i.cloudup.com/StzWWrY34s.png" />
+                <h3>Auth0 Example</h3>
+                <p>Zero friction identity infrastructure, built for developers</p>
+                <a class="btn btn-primary btn-lg btn-login btn-block" href="login.php">SignIn</a>
+              </div>
+              <?php else: ?>
+              <div class="logged-in-box auth0-box logged-in">
+                <h1 id="logo"><img src="//cdn.auth0.com/samples/auth0_logo_final_blue_RGB.png" /></h1>
+                <img class="avatar" src="<?php echo $userInfo['picture'] ?>"/>
+                <h2>Welcome <span class="nickname"><?php echo $userInfo['nickname'] ?></span></h2>
+                <a class="btn btn-warning btn-logout" href="/logout.php">Logout</a>
+              </div>
+              <?php endif ?>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

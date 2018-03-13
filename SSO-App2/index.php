@@ -23,7 +23,7 @@
           var webAuth = new auth0.WebAuth({
             domain: 'eas-test.auth0.com',
             clientID: 'xXdd77BzxKCzqQ84EfA1eg9vTs1KLMsX',
-            redirectUri: 'http://localhost/sso-app2/callback',
+            redirectUri: 'http://sso-app2/callback',
             audience: `https://eas-test.auth0.com/userinfo`,
             responseType: 'code',
             scope: 'openid profile'
